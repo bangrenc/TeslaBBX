@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<script>
+function ajax_request()
+{
+var xmlhttp;
+if (window.XMLHttpRequest) {
+    // code for IE7+, Firefox, Chrome, Opera, Safari
+    xmlhttp=new XMLHttpRequest();
+  } else {    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+
+    // code for IE6, IE5
+}
+xmlhttp.onreadystatechange=function() {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+  
+      document.getElementById("BBX").innerHTML=xmlhttp.responseText;
+  }
+}
+var data= new FormData(document.forms.namedItem("a"));
+
+xmlhttp.open("POST",'/TeslaApp/views/BBXData/', true);
+xmlhttp.send(data);
+}
+</script>
+
+<body>
+<form method="post" enctype="multipart/form-data" id="a">
+{{uf.as_p}}
+<input type="button" value="BBXData" onclick="ajax_request()"/>
+</form>
+<p>--------------------------------------BBX Data--------------------------------------</p>
+<div id="BBX"></div>
+</body>
+</html>
